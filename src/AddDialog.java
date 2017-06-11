@@ -11,30 +11,33 @@ public class AddDialog extends JDialog implements ActionListener {
 
     public AddDialog(String titre, String message, String[] params) {
         setTitle(titre);
+        setLayout(new BorderLayout());
 
         int nombreLignes = params.length;
 
         JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new GridLayout(nombreLignes + 1, 1));
+        contentPanel.setLayout(new GridLayout(1, 2));
         contentPanel.setBorder(new TitledBorder(message));
 
         JLabel[] labels = new JLabel[nombreLignes];
         JTextField[] textFields = new JTextField[nombreLignes];
+
+        JPanel labelPanel = new JPanel(new GridLayout(nombreLignes, 1));
+        JPanel valeurPanel = new JPanel(new GridLayout(nombreLignes, 1));
         for (int i = 0; i < nombreLignes; i++) {
             labels[i] = new JLabel(params[i]);
+            labelPanel.add(labels[i]);
+
             textFields[i] = new JTextField(20);
-
-            JPanel panel = new JPanel();
-            panel.add(labels[i]);
-            panel.add(textFields[i]);
-
-            contentPanel.add(panel);
+            valeurPanel.add(textFields[i]);
         }
+        contentPanel.add(labelPanel);
+        contentPanel.add(valeurPanel);
+
+        add(contentPanel, BorderLayout.NORTH);
 
         JButton bouton = new JButton("Ajouter");
-        contentPanel.add(bouton);
-
-        add(contentPanel);
+        add(bouton, BorderLayout.SOUTH);
 
         pack();
         setVisible(true);
