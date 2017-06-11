@@ -12,10 +12,15 @@ import java.util.*;
  */
 public class Bdd implements Signatures {
 
+    private static final Signatures bdd = new Bdd();
     private AuteurCollection auteurCollection;
 
     public Bdd() {
         auteurCollection = new AuteurCollection();
+    }
+
+    public static Signatures getInstance() {
+        return bdd;
     }
 
     /**

@@ -5,6 +5,7 @@ import java.awt.*;
 /**
  * Created by rsn on 2017-06-10.
  */
+@Deprecated
 public class AddAuteurDialog extends JDialog {
 
     public AddAuteurDialog() {

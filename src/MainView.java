@@ -10,8 +10,11 @@ public class MainView extends JFrame implements ActionListener {
     private static final String[] auteurParams = {"Code", "Nom", "Pays"};
     private static final String[] livreParams = {"Code", "Titre", "Categorie", "Code de l'auteur", "Prix", "Nombre des pages"};
 
-    private JMenuItem auteurMenuItem;
-    private JMenuItem livreMenuItem;
+    private JMenuItem addAuteurMenuItem;
+    private JMenuItem addLivreMenuItem;
+
+    private JMenuItem getAuteurMenuItem;
+    private JMenuItem getLivreMenuItem;
 
     public MainView(String titre) {
 
@@ -30,16 +33,29 @@ public class MainView extends JFrame implements ActionListener {
 
 
         JMenu addMenu = new JMenu("Ajouter");
+        addAuteurMenuItem = new JMenuItem("Auteur");
+        addAuteurMenuItem.addActionListener(this);
+
+        addLivreMenuItem = new JMenuItem("Livre");
+        addLivreMenuItem.addActionListener(this);
+
+        addMenu.add(addAuteurMenuItem);
+        addMenu.add(addLivreMenuItem);
+
+        //------------------------------------------------------
+        JMenu getMenu = new JMenu("Recherche");
+        getAuteurMenuItem = new JMenuItem("Auteur");
+        getAuteurMenuItem.addActionListener(this);
+
+        getLivreMenuItem = new JMenuItem("Livre");
+        getLivreMenuItem.addActionListener(this);
+
+        getMenu.add(getAuteurMenuItem);
+        getMenu.add(getLivreMenuItem);
+
+
         appMenu.add(addMenu);
-        auteurMenuItem = new JMenuItem("Auteur");
-        auteurMenuItem.addActionListener(this);
-
-        livreMenuItem = new JMenuItem("Livre");
-        livreMenuItem.addActionListener(this);
-
-        addMenu.add(auteurMenuItem);
-        addMenu.add(livreMenuItem);
-
+        appMenu.add(getMenu);
 
         ImageIcon udemImage = new ImageIcon("udem_logo_medium.png");
         JLabel imageLabel = new JLabel();
@@ -56,9 +72,9 @@ public class MainView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object component = e.getSource();
-        if (component == auteurMenuItem) {
+        if (component == addAuteurMenuItem) {
             new AddDialog("Ajouter un auteur", "Veuillez enter les valeurs de l'auteur", auteurParams);
-        } else if (component == livreMenuItem) {
+        } else if (component == addLivreMenuItem) {
             new AddDialog("Ajouter un Livre", "Veuillez entrer les valeurs du livre", livreParams);
         }
     }

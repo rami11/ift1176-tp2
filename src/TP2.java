@@ -10,7 +10,7 @@ import java.io.IOException;
 public class TP2 extends JFrame {
 
     public static void main(String[] args) {
-        Signatures BdDonnees = new Bdd();
+        Signatures BdDonnees = Bdd.getInstance();
 
         try {
             BdDonnees.lireBddAut("Auteurs.txt");
