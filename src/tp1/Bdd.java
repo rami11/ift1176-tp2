@@ -131,14 +131,6 @@ public class Bdd implements Signatures {
     @Override
     public Livre getLivre(String titre) {
 
-        /*for (tp1.Auteur auteur : auteurLivresMap.keySet()) {
-            Set<tp1.Livre> livres = auteurLivresMap.get(auteur);
-            for (tp1.Livre livre : livres) {
-                if (livre.getTitre().equalsIgnoreCase(titre)) {
-                    return livre;
-                }
-            }
-        }*/
         return auteurCollection.getLivre(titre);
     }
 
