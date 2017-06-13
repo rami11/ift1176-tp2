@@ -73,19 +73,30 @@ public class Auteur implements Comparable<Auteur> {
         return getNom();
     }
 
-    /*@Override
-    public int compareTo(tp1.Auteur o) {
-        *//*int res = code - o.code;
-        if (res != 0) {
-            return res;
-        } else {
-            return getNom().compareTo(o.getNom());
-        }*//*
-        return code - o.code;
-    }*/
-
     @Override
     public int compareTo(Auteur o) {
         return nom.compareTo(o.getNom());
+    }
+
+    public String afficherInfo() {
+
+        return String.format("Code:\t%d\nNom:\t%-5s\nPays:\t%-5s",
+                this.code, this.nom, this.pays);
+
+        /*StringBuilder builder = new StringBuilder();
+        // Code
+        builder.append("Code:\t");
+        builder.append(this.code);
+        builder.append('\n');
+        // Nom
+        builder.append("Nom:\t");
+        builder.append(this.nom);
+        builder.append('\n');
+        // Pays
+        builder.append("Pays:\t");
+        builder.append(this.pays);
+        builder.append('\n');
+
+        return builder.toString();*/
     }
 }

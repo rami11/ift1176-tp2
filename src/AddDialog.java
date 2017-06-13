@@ -27,8 +27,7 @@ public class AddDialog extends JDialog implements ActionListener {
 
         nombreParams = params.length;
 
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new GridLayout(1, 2));
+        JPanel contentPanel = new JPanel(new GridLayout(1, 2));
         contentPanel.setBorder(new TitledBorder(message));
 
         JLabel[] labels = new JLabel[nombreParams];

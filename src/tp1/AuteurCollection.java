@@ -40,7 +40,7 @@ public class AuteurCollection {
     public Auteur getAuteur(String nom) {
         List<Auteur> auteurSortedList = new ArrayList<>(auteurSet);
         int auteurIndex = Collections.binarySearch(auteurSortedList, new Auteur(nom));
-        return auteurSortedList.get(auteurIndex);
+        return auteurIndex >= 0 ? auteurSortedList.get(auteurIndex) : null;
     }
 
     public Auteur getAuteur(int codeAuteur) {
