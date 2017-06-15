@@ -1,7 +1,11 @@
+import tp1.Bdd;
+import tp1.Signatures;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * Created by rsn on 2017-06-09.
@@ -95,6 +99,15 @@ public class MainView extends JFrame implements ActionListener {
 
         add(imageLabel, BorderLayout.CENTER);
 
+        // Rapport
+        Signatures bdd = Bdd.getInstance();
+        try {
+            bdd.rapportParAuteurs();
+            bdd.rapportParLivres();
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+        }
+
         pack();
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -116,8 +129,11 @@ public class MainView extends JFrame implements ActionListener {
             new GetDialog("Chercher un livre", "Veuillez entrer le nom du livre");
         } else if (composant == rapportParAuteurMenuItem) {
 
+            String parAuteurContenu = IOUtils.lireFichierTexte("parAuteur.txt");
+            new RapportDialog("Rapport par auteur", parAuteurContenu);
         } else if (composant == rapportParLivreMenuItem) {
-
+            String parLivreContenu = IOUtils.lireFichierTexte("parLivre.txt");
+            new RapportDialog("Rapport par livre", parLivreContenu);
         }
     }
 }
