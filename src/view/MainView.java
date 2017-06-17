@@ -1,6 +1,6 @@
 package view;
 
-import util.DialogUtils;
+import view.menu.AboutMenu;
 import view.menu.ApplicationMenu;
 import view.menu.FichierMenu;
 
@@ -31,18 +31,8 @@ public class MainView extends JFrame implements ActionListener {
         setJMenuBar(menuBar);
 
         JMenu fichierMenu = new FichierMenu("Fichier");
-
         JMenu applicationMenu = new ApplicationMenu("Application");
-        JMenu aboutMenu = new JMenu("À propos");
-
-        infoMenuItem = new JMenuItem("Info");
-        infoMenuItem.addActionListener(this);
-
-        aideMenuItem = new JMenuItem("Aide");
-        aideMenuItem.addActionListener(this);
-
-        aboutMenu.add(infoMenuItem);
-        aboutMenu.add(aideMenuItem);
+        JMenu aboutMenu = new AboutMenu("À propos");
 
         menuBar.add(fichierMenu);
         menuBar.add(applicationMenu);
@@ -73,8 +63,5 @@ public class MainView extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object composant = e.getSource();
 
-        if (composant == infoMenuItem) {
-            DialogUtils.showAppInfoDialog(this);
-        }
     }
 }
