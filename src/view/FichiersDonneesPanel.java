@@ -10,7 +10,6 @@ import java.awt.*;
 public class FichiersDonneesPanel extends JPanel {
 
     public FichiersDonneesPanel() {
-        //JPanel fichierDonneesPanel = new JPanel(new BorderLayout());
         setLayout(new BorderLayout());
         TitledBorder titledBorder = new TitledBorder("Les fichier de données");
         titledBorder.setTitleJustification(TitledBorder.RIGHT);
