@@ -5,6 +5,7 @@ import view.menu.ApplicationMenu;
 import view.menu.FichierMenu;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +19,6 @@ public class MainView extends JFrame implements ActionListener {
     private JMenuItem aideMenuItem;
 
     private MainView(String titre) {
-
         setLayout(new BorderLayout());
         setTitle(titre);
         setResizable(false);
@@ -43,6 +43,30 @@ public class MainView extends JFrame implements ActionListener {
         menuBar.add(fichierMenu);
         menuBar.add(applicationMenu);
         menuBar.add(aboutMenu);
+
+        JPanel fichierDonneesPanel = new JPanel(new BorderLayout());
+        TitledBorder titledBorder = new TitledBorder("Les fichier de données");
+        titledBorder.setTitleJustification(TitledBorder.RIGHT);
+        fichierDonneesPanel.setBorder(titledBorder);
+
+        JPanel labelPanel = new JPanel(new GridLayout(2, 1));
+        JLabel auteurLabel = new JLabel("Auteur");
+        JLabel livreLabel = new JLabel("Livre");
+        labelPanel.add(auteurLabel);
+        labelPanel.add(livreLabel);
+
+        JPanel textFieldPanel = new JPanel(new GridLayout(2, 1));
+        JTextField auteurTextField = new JTextField(45);
+        auteurTextField.setEnabled(false);
+        textFieldPanel.add(auteurTextField);
+        JTextField livreTextField = new JTextField(45);
+        livreTextField.setEnabled(false);
+        textFieldPanel.add(livreTextField);
+
+        fichierDonneesPanel.add(labelPanel, BorderLayout.WEST);
+        fichierDonneesPanel.add(textFieldPanel, BorderLayout.EAST);
+
+        add(fichierDonneesPanel, BorderLayout.NORTH);
 
         ImageIcon udemImage = new ImageIcon("udem_logo_medium.png");
         JLabel imageLabel = new JLabel();

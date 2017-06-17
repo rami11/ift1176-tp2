@@ -8,6 +8,8 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -64,7 +66,24 @@ public class LireDialog extends JDialog implements ActionListener {
         JPanel boutonsPanel = new JPanel(new GridLayout(2, 1));
         lireAuteurBouton = new JButton("Auteur");
         lireAuteurBouton.addActionListener(this);
+
+        Action lireAuteurAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser auteurChooser = new FileChooserDialog("Choisir un fichier de données d'auteur", new File("Auteur/"));
+                int result = auteurChooser.showOpenDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    isFichierAuteurChoisi = true;
+                    auteurTextField.setText(auteurChooser.getSelectedFile().getAbsolutePath());
+                }
+            }
+        };
+        lireAuteurAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
+
+        lireAuteurBouton.getActionMap().put("lireAuteurAction", lireAuteurAction);
+        lireAuteurBouton.getInputMap().put((KeyStroke) lireAuteurAction.getValue(Action.ACCELERATOR_KEY), "lireAuteurAction");
         boutonsPanel.add(lireAuteurBouton);
+
         lireLivreBouton = new JButton("Livre");
         lireLivreBouton.addActionListener(this);
         boutonsPanel.add(lireLivreBouton);
@@ -96,15 +115,17 @@ public class LireDialog extends JDialog implements ActionListener {
         } else if (composant == appliquerBouton) {
             if (isFichierAuteurChoisi && isFichierLivreChoisi) {
                 try {
+                    ((Bdd) bdd).clear();
+
                     bdd.lireBddAut(auteurTextField.getText());
                     bdd.lireBddLivre(livreTextField.getText());
 
-                    JOptionPane.showMessageDialog(null, "Success");
+                    JOptionPane.showMessageDialog(null, "Les fichiers Auteur et Livre ont été lus", "Succès", JOptionPane.INFORMATION_MESSAGE);
                 } catch (IOException ioEx) {
                     ioEx.printStackTrace();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Fail");
+                JOptionPane.showMessageDialog(null, "Vous devez remplir les deux champs avec les fichiers appropriés afin de réussir", "Attention", JOptionPane.WARNING_MESSAGE);
             }
         }
     }
