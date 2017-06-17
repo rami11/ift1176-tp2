@@ -1,7 +1,10 @@
+package view.dialog;
+
 import tp1.Auteur;
 import tp1.Bdd;
 import tp1.Livre;
 import tp1.Signatures;
+import util.DialogUtils;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

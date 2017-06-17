@@ -17,6 +17,12 @@ public class AuteurCollection {
         livreSet = new TreeSet<>();
     }
 
+    public void clear() {
+        auteurLivresMap.clear();
+        auteurSet.clear();
+        livreSet.clear();
+    }
+
     public void addAuteur(Auteur auteur) {
         auteurLivresMap.put(auteur, new LinkedHashSet<>());
         if (!auteurSet.contains(auteur)) {

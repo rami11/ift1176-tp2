@@ -1,5 +1,6 @@
 import tp1.Bdd;
 import tp1.Signatures;
+import view.MainView;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -16,11 +17,14 @@ public class TP2 extends JFrame {
             BdDonnees.lireBddAut("Auteurs.txt");
             BdDonnees.lireBddLivre("Livres.txt");
 
+            BdDonnees.rapportParAuteurs();
+            BdDonnees.rapportParLivres();
+
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
         }
 
-
-        new MainView("IFT-1176 (TP2)");
+        JFrame mainView = MainView.getInstance();
+        ((MainView) mainView).showView();
     }
 }

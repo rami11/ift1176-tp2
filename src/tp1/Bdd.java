@@ -23,6 +23,10 @@ public class Bdd implements Signatures {
         return bdd;
     }
 
+    public void clear() {
+        auteurCollection.clear();
+    }
+
     /**
      * Permet de lire un fichier d’auteurs passé en argument de créer la map et ajouter les auteurs à la map.
      *

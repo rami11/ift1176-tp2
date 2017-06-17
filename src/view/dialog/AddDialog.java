@@ -1,3 +1,5 @@
+package view.dialog;
+
 import tp1.Auteur;
 import tp1.Bdd;
 import tp1.Livre;

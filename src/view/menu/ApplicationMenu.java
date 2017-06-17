@@ -1,16 +1,20 @@
-import tp1.Bdd;
-import tp1.Signatures;
+package view.menu;
+
+import util.IOUtils;
+import view.dialog.AddDialog;
+import view.dialog.GetDialog;
+import view.dialog.RapportDialog;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 /**
- * Created by rsn on 2017-06-09.
+ * Created by rsn on 2017-06-15.
  */
-public class MainView extends JFrame implements ActionListener {
+public class ApplicationMenu extends JMenu implements ActionListener {
     private static final String[] auteurParams = {"Code", "Nom", "Pays"};
     private static final String[] livreParams = {"Code", "Titre", "Categorie", "Code de l'auteur", "Prix", "Nombre des pages"};
 
@@ -23,35 +27,8 @@ public class MainView extends JFrame implements ActionListener {
     private JMenuItem rapportParAuteurMenuItem;
     private JMenuItem rapportParLivreMenuItem;
 
-    private JMenuItem infoMenuItem;
-    private JMenuItem aideMenuItem;
-
-    private JMenu aboutMenu;
-
-    public MainView(String titre) {
-
-        setLayout(new BorderLayout());
-        setTitle(titre);
-        setResizable(false);
-
-        JMenuBar menuBar = new JMenuBar();
-        setJMenuBar(menuBar);
-
-        JMenu appMenu = new JMenu("Application");
-        aboutMenu = new JMenu("À propos");
-
-        infoMenuItem = new JMenuItem("Info");
-        infoMenuItem.addActionListener(this);
-
-        aideMenuItem = new JMenuItem("Aide");
-        aideMenuItem.addActionListener(this);
-
-        aboutMenu.add(infoMenuItem);
-        aboutMenu.add(aideMenuItem);
-
-        menuBar.add(appMenu);
-        menuBar.add(aboutMenu);
-
+    public ApplicationMenu(String s) {
+        super(s);
 
         JMenu addMenu = new JMenu("Ajouter");
         addMenu.setIcon(new ImageIcon("icon_add_tout_petit.png"));
@@ -69,9 +46,11 @@ public class MainView extends JFrame implements ActionListener {
         getMenu.setIcon(new ImageIcon("icon_search_tout_petit.png"));
         getAuteurMenuItem = new JMenuItem("un auteur");
         getAuteurMenuItem.addActionListener(this);
+        getAuteurMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
 
         getLivreMenuItem = new JMenuItem("un livre");
         getLivreMenuItem.addActionListener(this);
+        getLivreMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_MASK));
 
         getMenu.add(getAuteurMenuItem);
         getMenu.add(getLivreMenuItem);
@@ -88,38 +67,17 @@ public class MainView extends JFrame implements ActionListener {
         rapportMenu.add(rapportParAuteurMenuItem);
         rapportMenu.add(rapportParLivreMenuItem);
 
-        appMenu.add(addMenu);
-        appMenu.add(getMenu);
-        appMenu.add(new JSeparator());
-        appMenu.add(rapportMenu);
-
-        ImageIcon udemImage = new ImageIcon("udem_logo_medium.png");
-        JLabel imageLabel = new JLabel();
-        imageLabel.setIcon(udemImage);
-
-        add(imageLabel, BorderLayout.CENTER);
-
-        // Rapport
-        Signatures bdd = Bdd.getInstance();
-        try {
-            bdd.rapportParAuteurs();
-            bdd.rapportParLivres();
-        } catch (IOException ioEx) {
-            ioEx.printStackTrace();
-        }
-
-        pack();
-        setVisible(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        add(addMenu);
+        add(getMenu);
+        add(new JSeparator());
+        add(rapportMenu);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Object composant = e.getSource();
 
-        if (composant == infoMenuItem) {
-            DialogUtils.showAppInfotDialog(this);
-        } else if (composant == addAuteurMenuItem) {
+        if (composant == addAuteurMenuItem) {
             new AddDialog("Ajouter un auteur", "Veuillez enter les valeurs de l'auteur", auteurParams);
         } else if (composant == addLivreMenuItem) {
             new AddDialog("Ajouter un Livre", "Veuillez entrer les valeurs du livre", livreParams);

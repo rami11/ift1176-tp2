@@ -1,3 +1,5 @@
+package util;
+
 import tp1.Auteur;
 import tp1.Livre;
 
@@ -32,7 +34,7 @@ public class DialogUtils {
         }
     }
 
-    public static void showAppInfotDialog(Component parent) {
+    public static void showAppInfoDialog(Component parent) {
         JOptionPane.showMessageDialog(
                 parent,
                 "Université de montreal\nIFT-1176 (TP2)\nDroits d'auteur\u00a9 Rami Serapian 2017",
