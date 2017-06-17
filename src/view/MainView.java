@@ -5,7 +5,6 @@ import view.menu.ApplicationMenu;
 import view.menu.FichierMenu;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,10 +14,15 @@ import java.awt.event.ActionListener;
  */
 public class MainView extends JFrame implements ActionListener {
     private static final JFrame mainView = new MainView("IFT-1176 (TP2)");
+    public static boolean isFichierAuteurChoisi;
+    public static boolean isFichierLivreChoisi;
     private JMenuItem infoMenuItem;
     private JMenuItem aideMenuItem;
 
     private MainView(String titre) {
+        isFichierAuteurChoisi = false;
+        isFichierLivreChoisi = false;
+
         setLayout(new BorderLayout());
         setTitle(titre);
         setResizable(false);
@@ -44,27 +48,7 @@ public class MainView extends JFrame implements ActionListener {
         menuBar.add(applicationMenu);
         menuBar.add(aboutMenu);
 
-        JPanel fichierDonneesPanel = new JPanel(new BorderLayout());
-        TitledBorder titledBorder = new TitledBorder("Les fichier de données");
-        titledBorder.setTitleJustification(TitledBorder.RIGHT);
-        fichierDonneesPanel.setBorder(titledBorder);
-
-        JPanel labelPanel = new JPanel(new GridLayout(2, 1));
-        JLabel auteurLabel = new JLabel("Auteur");
-        JLabel livreLabel = new JLabel("Livre");
-        labelPanel.add(auteurLabel);
-        labelPanel.add(livreLabel);
-
-        JPanel textFieldPanel = new JPanel(new GridLayout(2, 1));
-        JTextField auteurTextField = new JTextField(45);
-        auteurTextField.setEnabled(false);
-        textFieldPanel.add(auteurTextField);
-        JTextField livreTextField = new JTextField(45);
-        livreTextField.setEnabled(false);
-        textFieldPanel.add(livreTextField);
-
-        fichierDonneesPanel.add(labelPanel, BorderLayout.WEST);
-        fichierDonneesPanel.add(textFieldPanel, BorderLayout.EAST);
+        JPanel fichierDonneesPanel = new FichiersDonneesPanel();
 
         add(fichierDonneesPanel, BorderLayout.NORTH);
 
