@@ -1,7 +1,6 @@
 package view.menu;
 
-import tp1.Bdd;
-import tp1.Signatures;
+import view.FichiersDonneesPanel;
 import view.MainView;
 import view.dialog.FileChooserDialog;
 
@@ -23,8 +22,10 @@ public class FichierMenu extends JMenu implements ActionListener {
 
         JMenu lireMenu = new JMenu("Lire");
         lireAuteurMenuItem = new JMenuItem("Auteur");
+        lireAuteurMenuItem.addActionListener(this);
         lireAuteurMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
         lireLivreMenuItem = new JMenuItem("Livre");
+        lireLivreMenuItem.addActionListener(this);
         lireLivreMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
         lireMenu.add(lireAuteurMenuItem);
         lireMenu.add(lireLivreMenuItem);
@@ -41,31 +42,33 @@ public class FichierMenu extends JMenu implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFrame frame = MainView.getInstance();
-        Signatures bdd = Bdd.getInstance();
 
         Object composant = e.getSource();
-        /*if (composant == lireMenuItem) {
-            new LireDialog();
 
-        }*/
         if (composant == lireAuteurMenuItem) {
             JFileChooser auteurChooser = new FileChooserDialog("Choisir un fichier de données d'auteur", new File("Auteur/"));
             int result = auteurChooser.showOpenDialog(null);
             if (result == JFileChooser.APPROVE_OPTION) {
-                MainView.isFichierAuteurChoisi = true;
-                //auteurTextField.setText(auteurChooser.getSelectedFile().getAbsolutePath());
+                String nomFichier = auteurChooser.getSelectedFile().getAbsolutePath();
+                FichiersDonneesPanel.getAuteurTextField().setText(nomFichier);
+                if (!FichiersDonneesPanel.getLivreTextField().getText().isEmpty()) {
+                    FichiersDonneesPanel.initAppliquerBouton();
+                }
             }
 
         } else if (composant == lireLivreMenuItem) {
             JFileChooser livreChooser = new FileChooserDialog("Choisir un fichier de données de livre", new File("Livre/"));
             int result = livreChooser.showOpenDialog(null);
             if (result == JFileChooser.APPROVE_OPTION) {
-                MainView.isFichierLivreChoisi = true;
-                //livreTextField.setText(livreChooser.getSelectedFile().getAbsolutePath());
-            }
+                String nomFichier = livreChooser.getSelectedFile().getAbsolutePath();
+                FichiersDonneesPanel.getLivreTextField().setText(nomFichier);
+                if (!FichiersDonneesPanel.getAuteurTextField().getText().isEmpty()) {
+                    FichiersDonneesPanel.initAppliquerBouton();
+                }
 
-        } else if (composant == quitterMenuItem) {
-            frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            } else if (composant == quitterMenuItem) {
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
         }
     }
 }
