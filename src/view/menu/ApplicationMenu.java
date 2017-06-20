@@ -1,5 +1,7 @@
 package view.menu;
 
+import tp1.Bdd;
+import tp1.Signatures;
 import util.IOUtils;
 import view.dialog.AddDialog;
 import view.dialog.GetDialog;
@@ -10,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 /**
  * Created by rsn on 2017-06-15.
@@ -75,6 +78,7 @@ public class ApplicationMenu extends JMenu implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Signatures bdd = Bdd.getInstance();
         Object composant = e.getSource();
 
         if (composant == addAuteurMenuItem) {
@@ -86,9 +90,13 @@ public class ApplicationMenu extends JMenu implements ActionListener {
         } else if (composant == getLivreMenuItem) {
             new GetDialog("Chercher un livre", "Veuillez entrer le nom du livre");
         } else if (composant == rapportParAuteurMenuItem) {
-
-            String parAuteurContenu = IOUtils.lireFichierTexte("parAuteur.txt");
-            new RapportDialog("Rapport par auteur", parAuteurContenu);
+            try {
+                bdd.rapportParAuteurs();
+                String parAuteurContenu = IOUtils.lireFichierTexte("parAuteur.txt");
+                new RapportDialog("Rapport par auteur", parAuteurContenu);
+            } catch (IOException ioEx) {
+                ioEx.printStackTrace();
+            }
         } else if (composant == rapportParLivreMenuItem) {
             String parLivreContenu = IOUtils.lireFichierTexte("parLivre.txt");
             new RapportDialog("Rapport par livre", parLivreContenu);

@@ -76,6 +76,8 @@ public class AddDialog extends JDialog implements ActionListener {
             } else {
                 bdd.addLivre(new Livre(info));
             }
+            dispose();
+            // TODO: success message
         }
 
     }
