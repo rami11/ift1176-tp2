@@ -23,6 +23,7 @@ public class AboutMenu extends JMenu implements ActionListener {
         infoMenuItem.addActionListener(this);
 
         aideMenuItem = new JMenuItem("Aide");
+        aideMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
         aideMenuItem.addActionListener(this);
 
         add(infoMenuItem);
@@ -35,6 +36,8 @@ public class AboutMenu extends JMenu implements ActionListener {
 
         if (composant == infoMenuItem) {
             DialogUtils.showAppInfoDialog(null);
+        } else if (composant == aideMenuItem) {
+            JOptionPane.showMessageDialog(null, "bla bal blab");
         }
     }
 }

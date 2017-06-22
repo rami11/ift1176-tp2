@@ -29,7 +29,7 @@ public class AddDialog extends JDialog implements ActionListener {
 
         nombreParams = params.length;
 
-        JPanel contentPanel = new JPanel(new GridLayout(1, 2));
+        JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(new TitledBorder(message));
 
         JLabel[] labels = new JLabel[nombreParams];
@@ -44,8 +44,8 @@ public class AddDialog extends JDialog implements ActionListener {
             textFields[i] = new JTextField(20);
             valeurPanel.add(textFields[i]);
         }
-        contentPanel.add(labelPanel);
-        contentPanel.add(valeurPanel);
+        contentPanel.add(labelPanel, BorderLayout.WEST);
+        contentPanel.add(valeurPanel, BorderLayout.EAST);
 
         add(contentPanel, BorderLayout.NORTH);
 
@@ -56,6 +56,33 @@ public class AddDialog extends JDialog implements ActionListener {
         pack();
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    private static String validateAuteurInfo(String[] info) {
+        String message = "";
+        if (info[0].isEmpty()) {
+            message += "Le champ Code est vide\n";
+        }
+        if (info[1].isEmpty()) {
+            message += "Le champ Nom est vide\n";
+        }
+        if (info[2].isEmpty()) {
+            message += "Le champ Pays est vide\n";
+        }
+        if (!info[0].isEmpty()) {
+            try {
+                Integer.valueOf(info[0]);
+                return "ok";
+            } catch (Exception ex) {
+                message += "Le champ Code doit être entier\n";
+                return message;
+            }
+        }
+        return message;
+    }
+
+    private static boolean validateLivreInfo() {
+        return false;
     }
 
     @Override
@@ -72,12 +99,19 @@ public class AddDialog extends JDialog implements ActionListener {
             }
 
             if (nombreParams == 3) {
-                bdd.addAuteur(new Auteur(info));
+                String resultMessage = validateAuteurInfo(info);
+                if (resultMessage.equalsIgnoreCase("ok")) {
+                    bdd.addAuteur(new Auteur(info));
+                    JOptionPane.showMessageDialog(null, "Success");
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, resultMessage);
+                }
+
             } else {
                 bdd.addLivre(new Livre(info));
             }
-            dispose();
-            // TODO: success message
+
         }
 
     }

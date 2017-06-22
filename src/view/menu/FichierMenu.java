@@ -65,10 +65,9 @@ public class FichierMenu extends JMenu implements ActionListener {
                 if (!FichiersDonneesPanel.getAuteurTextField().getText().isEmpty()) {
                     FichiersDonneesPanel.initAppliquerBouton();
                 }
-
-            } else if (composant == quitterMenuItem) {
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
+        } else if (composant == quitterMenuItem) {
+            frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         }
     }
 }

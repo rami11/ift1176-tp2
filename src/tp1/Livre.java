@@ -1,113 +1,86 @@
 package tp1;
 
-/**
- * Created by rsn on 2017-05-11.
- */
+// classe servant a stockef les details d'un livre
 public class Livre implements Comparable<Livre> {
-
-    private int code;
+    private int codeLivre;
     private String titre;
     private String categorie;
     private int codeAuteur;
     private double prix;
-    private int nbPage;
-
-    public Livre(String titre, int code, int codeAuteur, String categorie, int nbPage, double prix) {
-        this.titre = titre;
-        this.code = code;
-        this.codeAuteur = codeAuteur;
-        this.categorie = categorie;
-        this.nbPage = nbPage;
-        this.prix = prix;
-    }
+    private int nbPages;
 
     public Livre(String[] info) {
-        this.code = Integer.valueOf(info[0]);
+        this.codeLivre = Integer.valueOf(info[0]);
         this.titre = info[1];
         this.categorie = info[2];
         this.codeAuteur = Integer.valueOf(info[3]);
         this.prix = Double.valueOf(info[4]);
-        this.nbPage = Integer.valueOf(info[5]);
+        this.nbPages = Integer.valueOf(info[5]);
     }
 
-    public Livre(String titre) {
-        this(titre, -1, -1, "", -1, -1.0);
+
+    public Livre() {
+        codeLivre = 0;
+        titre = "";
+        categorie = "";
+        codeAuteur = 0;
+        prix = 0;
+        nbPages = 0;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
+    public Livre(String titre, int codeLivre, int codeAuteur, String categorie, int nbPages, double prix) {
+        this.codeLivre = codeLivre;
+        this.titre = titre;
+        this.categorie = categorie;
+        this.codeAuteur = codeAuteur;
+        this.prix = prix;
+        this.nbPages = nbPages;
     }
 
     public String getTitre() {
         return titre;
     }
 
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public String getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
+    public int getCode() {
+        return codeLivre;
     }
 
     public int getCodeAuteur() {
         return codeAuteur;
     }
 
-    public void setCodeAuteur(int codeAuteur) {
-        this.codeAuteur = codeAuteur;
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public int getNbPages() {
+        return nbPages;
     }
 
     public double getPrix() {
         return prix;
     }
 
-    public void setPrix(double prix) {
-        this.prix = prix;
+    // comparaison selon le titre
+    public int compareTo(Livre autre) {
+
+        return (titre.compareToIgnoreCase(autre.titre));
     }
 
-    public int getNbPage() {
-        return nbPage;
+    // egalit� selon le code du livre
+    public boolean equals(Object obj) {
+        if (this == obj) // comparer a lui-meme
+            return true;
+        if (!(obj instanceof Livre))
+            return false;
+        Livre autre = (Livre) obj;
+        return (codeLivre == autre.codeLivre) ? true : false;
+
     }
 
-    public void setNbPage(int nbPage) {
-        this.nbPage = nbPage;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Livre livre = (Livre) o;
-
-        return code == livre.code;
-    }
-
-    @Override
-    public int hashCode() {
-        return code;
-    }
-
-    @Override
     public String toString() {
-        return titre;
+        return String.format("%-25.25s %-12s %6.2f$ %d", getTitre(), getCategorie(), getPrix(), getNbPages());
+        //return codeLivre + " " + titre + " " + categorie + " " + codeAuteur + " " + prix + " " + nbPages;
     }
 
-    public String afficher() {
-        return String.format("%-35s\t%-10s\t%.2f$\t%d", getTitre(), getCategorie(), getPrix(), getNbPage());
-    }
-
-    @Override
-    public int compareTo(Livre o) {
-        return getTitre().compareTo(o.getTitre());
-    }
 }
