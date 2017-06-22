@@ -18,8 +18,8 @@ import java.io.IOException;
  * Created by rsn on 2017-06-15.
  */
 public class ApplicationMenu extends JMenu implements ActionListener {
-    private static final String[] auteurParams = {"Code", "Nom", "Pays"};
-    private static final String[] livreParams = {"Code", "Titre", "Categorie", "Code de l'auteur", "Prix", "Nombre des pages"};
+    public static final String[] AUTEUR_PARAMS = {"Code", "Nom", "Pays"};
+    public static final String[] LIVRE_PARAMS = {"Code", "Titre", "Catégorie", "Code de l'auteur", "Prix", "Nombre de pages"};
 
     private JMenuItem addAuteurMenuItem;
     private JMenuItem addLivreMenuItem;
@@ -82,9 +82,9 @@ public class ApplicationMenu extends JMenu implements ActionListener {
         Object composant = e.getSource();
 
         if (composant == addAuteurMenuItem) {
-            new AddDialog("Ajouter un auteur", "Veuillez enter les valeurs de l'auteur", auteurParams);
+            new AddDialog("Ajouter un auteur", "Veuillez enter les valeurs de l'auteur", AUTEUR_PARAMS);
         } else if (composant == addLivreMenuItem) {
-            new AddDialog("Ajouter un Livre", "Veuillez entrer les valeurs du livre", livreParams);
+            new AddDialog("Ajouter un Livre", "Veuillez entrer les valeurs du livre", LIVRE_PARAMS);
         } else if (composant == getAuteurMenuItem) {
             new GetDialog("Chercher un auteur", "Veuillez entrer le nom de l'auteur");
         } else if (composant == getLivreMenuItem) {

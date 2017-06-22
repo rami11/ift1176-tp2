@@ -24,8 +24,7 @@ public class FichiersDonneesPanel extends JPanel implements ActionListener {
 
         JPanel contentPanel = new JPanel(new BorderLayout());
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
+        JPanel panel = new JPanel(new BorderLayout(5, 0));
         TitledBorder titledBorder = new TitledBorder("Les fichier de données");
         titledBorder.setTitleJustification(TitledBorder.CENTER);
         setBorder(titledBorder);

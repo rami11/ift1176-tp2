@@ -18,7 +18,6 @@ public class Livre implements Comparable<Livre> {
         this.nbPages = Integer.valueOf(info[5]);
     }
 
-
     public Livre() {
         codeLivre = 0;
         titre = "";
