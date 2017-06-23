@@ -52,8 +52,22 @@ public class GetDialog extends JDialog implements ActionListener {
         Object composant = e.getSource();
         if (composant == getButton) {
             if (titre.contains("auteur")) {
-                Auteur auteur = bdd.getAuteur(textField.getText());
-                DialogUtils.showMessageDialog(this, auteur);
+                Auteur auteur;
+                try {
+                    int codeAuteur = Integer.valueOf(textField.getText());
+                    auteur = bdd.getAuteur(codeAuteur);
+                } catch (Exception ex) {
+                    auteur = bdd.getAuteur(textField.getText());
+                }
+                if (auteur == null) {
+                    JOptionPane.showMessageDialog(null,
+                            "L'auteur que vous recherchez n'existe pas",
+                            "Attention",
+                            JOptionPane.WARNING_MESSAGE);
+                } else {
+                    DialogUtils.showOuvresAuteur(auteur);
+                    textField.setText("");
+                }
             } else {
                 Livre livre = bdd.getLivre(textField.getText());
                 DialogUtils.showMessageDialog(this, livre);

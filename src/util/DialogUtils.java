@@ -1,15 +1,19 @@
 package util;
 
 import tp1.Auteur;
+import tp1.Bdd;
 import tp1.Livre;
+import tp1.Signatures;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collection;
 
 /**
  * Created by rsn on 2017-06-12.
  */
 public class DialogUtils {
+    private static Signatures bdd = Bdd.getInstance();
 
     public static void showMessageDialog(Component parent, Object object) {
 
@@ -31,6 +35,33 @@ public class DialogUtils {
                     "N/A",
                     "Info",
                     JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public static void showOuvresAuteur(Auteur auteur) {
+        if (auteur == null) {
+            JOptionPane.showMessageDialog(null,
+                    "L'auteur que vous recherchez n'existe pas",
+                    "Attention",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            Collection oeuvres = bdd.getColLivresAut(auteur);
+            StringBuilder builder = new StringBuilder();
+            builder.append("Les oeuvres de ");
+            builder.append(auteur.getNom());
+            builder.append(":\n");
+            if (oeuvres.isEmpty()) {
+                builder.append("N/A\n");
+            } else {
+                for (Object oeuvre : oeuvres) {
+                    builder.append(oeuvre);
+                    builder.append('\n');
+                }
+            }
+            JOptionPane.showMessageDialog(null,
+                    builder.toString(),
+                    "Oeuvres de l'auteur", JOptionPane.INFORMATION_MESSAGE,
+                    new ImageIcon("icon_auteur_petit.png"));
         }
     }
 

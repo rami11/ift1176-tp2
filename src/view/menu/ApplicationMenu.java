@@ -88,9 +88,9 @@ public class ApplicationMenu extends JMenu implements ActionListener {
         } else if (composant == addLivreMenuItem) {
             new AddDialog("Ajouter un Livre", "Veuillez entrer les valeurs du livre", LIVRE_PARAMS);
         } else if (composant == getAuteurMenuItem) {
-            new GetDialog("Chercher un auteur", "Veuillez entrer le nom de l'auteur");
+            new GetDialog("Chercher un auteur", "Veuillez entrer le nom ou le code de l'auteur");
         } else if (composant == getLivreMenuItem) {
-            new GetDialog("Chercher un livre", "Veuillez entrer le nom du livre");
+            new GetDialog("Chercher un livre", "Veuillez entrer le nom ou le code du livre");
         } else if (composant == rapportParAuteurMenuItem) {
             try {
                 bdd.rapportParAuteurs();
