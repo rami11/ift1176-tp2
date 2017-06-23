@@ -38,10 +38,10 @@ public class DialogUtils {
         }
     }
 
-    public static void showOuvresAuteur(Auteur auteur) {
+    public static void showOuvresAuteurDialog(Auteur auteur) {
         if (auteur == null) {
             JOptionPane.showMessageDialog(null,
-                    "L'auteur que vous recherchez n'existe pas",
+                    "L'auteur que vous cherchez n'existe pas",
                     "Attention",
                     JOptionPane.WARNING_MESSAGE);
         } else {
@@ -62,6 +62,28 @@ public class DialogUtils {
                     builder.toString(),
                     "Oeuvres de l'auteur", JOptionPane.INFORMATION_MESSAGE,
                     new ImageIcon("icon_auteur_petit.png"));
+        }
+    }
+
+    public static void showLivreInfoDialog(Livre livre) {
+        if (livre == null) {
+            JOptionPane.showMessageDialog(null,
+                    "Le livre que vous cherchez n'existe pas",
+                    "Attention",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            String nomAuteur = bdd.getAuteur(livre.getCodeAuteur()).getNom();
+
+            String message = livre.getTitre() + " de " + nomAuteur + " :\n";
+            message += "Code:\t" + livre.getCode() + '\n';
+            message += "Titre:\t" + livre.getTitre() + '\n';
+            message += "Catégorie:\t" + livre.getCategorie() + '\n';
+            message += "Prix:\t" + livre.getPrix() + '\n';
+            message += "Nombre de pages:\t" + livre.getNbPages();
+
+            JOptionPane.showMessageDialog(null,
+                    message, "Info", JOptionPane.INFORMATION_MESSAGE,
+                    new ImageIcon("icon_livre_petit.png"));
         }
     }
 
