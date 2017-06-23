@@ -1,9 +1,6 @@
-import tp1.Bdd;
-import tp1.Signatures;
 import view.MainView;
 
 import javax.swing.*;
-import java.io.IOException;
 
 /**
  * Created by rsn on 2017-06-09.
@@ -11,7 +8,7 @@ import java.io.IOException;
 public class TP2 extends JFrame {
 
     public static void main(String[] args) {
-        Signatures BdDonnees = Bdd.getInstance();
+        /*Signatures BdDonnees = Bdd.getInstance();
 
         try {
             BdDonnees.lireBddAut("Auteurs.txt");
@@ -22,7 +19,7 @@ public class TP2 extends JFrame {
 
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
-        }
+        }*/
 
         JFrame mainView = MainView.getInstance();
         ((MainView) mainView).showView();

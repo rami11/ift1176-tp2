@@ -36,9 +36,11 @@ public class ApplicationMenu extends JMenu implements ActionListener {
         JMenu addMenu = new JMenu("Ajouter");
         addMenu.setIcon(new ImageIcon("icon_add_tout_petit.png"));
         addAuteurMenuItem = new JMenuItem("un auteur");
+        addAuteurMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.ALT_MASK));
         addAuteurMenuItem.addActionListener(this);
 
         addLivreMenuItem = new JMenuItem("un livre");
+        addLivreMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.ALT_MASK));
         addLivreMenuItem.addActionListener(this);
 
         addMenu.add(addAuteurMenuItem);
@@ -98,8 +100,13 @@ public class ApplicationMenu extends JMenu implements ActionListener {
                 ioEx.printStackTrace();
             }
         } else if (composant == rapportParLivreMenuItem) {
-            String parLivreContenu = IOUtils.lireFichierTexte("parLivre.txt");
-            new RapportDialog("Rapport par livre", parLivreContenu);
+            try {
+                bdd.rapportParLivres();
+                String parLivreContenu = IOUtils.lireFichierTexte("parLivre.txt");
+                new RapportDialog("Rapport par livre", parLivreContenu);
+            } catch (IOException ioEx) {
+                ioEx.printStackTrace();
+            }
         }
     }
 }

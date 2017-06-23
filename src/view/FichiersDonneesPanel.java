@@ -76,19 +76,22 @@ public class FichiersDonneesPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Signatures bdd = Bdd.getInstance();
-        if (!auteurTextField.getText().isEmpty() && !livreTextField.getText().isEmpty()) {
+        Object composant = e.getSource();
 
-            ((Bdd) bdd).clear();
-            try {
-                bdd.lireBddAut(auteurTextField.getText());
-                bdd.lireBddLivre(livreTextField.getText());
-            } catch (IOException ioEx) {
-                ioEx.printStackTrace();
+        if (composant == appliquerBouton) {
+            if (!auteurTextField.getText().isEmpty() && !livreTextField.getText().isEmpty()) {
+
+                ((Bdd) bdd).clear();
+                try {
+                    bdd.lireBddAut(auteurTextField.getText());
+                    bdd.lireBddLivre(livreTextField.getText());
+                } catch (IOException ioEx) {
+                    ioEx.printStackTrace();
+                }
+
+                appliquerBouton.setText("OK");
+                appliquerBouton.setEnabled(false);
             }
-
-            appliquerBouton.setText("OK");
-            appliquerBouton.setEnabled(false);
         }
-
     }
 }

@@ -16,6 +16,7 @@ import java.io.IOException;
 /**
  * Created by rsn on 2017-06-17.
  */
+@Deprecated
 public class LireDialog extends JDialog implements ActionListener {
     private JButton lireAuteurBouton;
     private JButton lireLivreBouton;

@@ -2,6 +2,7 @@ package view.dialog;
 
 import tp1.Auteur;
 import tp1.Bdd;
+import tp1.Livre;
 import tp1.Signatures;
 import view.menu.ApplicationMenu;
 
@@ -74,7 +75,7 @@ public class AddDialog extends JDialog implements ActionListener {
                 }
             }
         }
-        return valide ? "L'auteur a été ajouté avec succès" : messageBuilder.toString();
+        return valide ? "ok" : messageBuilder.toString();
     }
 
     private static String validateLivreInfo(String[] info) {
@@ -93,7 +94,7 @@ public class AddDialog extends JDialog implements ActionListener {
                 }
             }
         }
-        return valide ? "Le livre a été ajouté avec succès" : messageBuilder.toString();
+        return valide ? "ok" : messageBuilder.toString();
     }
 
     @Override
@@ -112,100 +113,60 @@ public class AddDialog extends JDialog implements ActionListener {
             // Nous savons s'il faut ajouter un auteur ou un livre à partir du nombre de champs de saisie dans la boîte de dialogue
             // Nombre de champs de saisie 3 = Ajouter auteur
             if (nombreParams == 3) {
-                addAuteurOuLivre(bdd, info);
+                addAuteur(bdd, info);
 
             } else {
-                addAuteurOuLivre(bdd, info);
+                addLivre(bdd, info);
             }
 
         }
     }
 
-    private void addAuteurOuLivre(Signatures bdd, String[] info) {
-        String resultMessage = info.length == 3 ? validateAuteurInfo(info) : validateLivreInfo(info);
-        if (resultMessage.contains("succès")) {
+    private void addAuteur(Signatures bdd, String[] info) {
+        String resultMessage = validateAuteurInfo(info);
+        if (resultMessage.equals("ok")) {
+
+            // verifier si l'auteur exist déjà dans la map
+            int oldSize = ((Bdd) bdd).getMap().keySet().size();
             bdd.addAuteur(new Auteur(info));
-            JOptionPane.showMessageDialog(null, resultMessage, "Succès", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
+            int newSize = ((Bdd) bdd).getMap().keySet().size();
+            if (newSize == oldSize) {
+                JOptionPane.showMessageDialog(null, "Vérifiez que:\n" +
+                                "- Le code de l'auteur n'existe pas déjà\n" +
+                                "- Le nom de l'auteur n'existe pas déjà",
+                        "Attention", JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "L'auteur a été ajouter avec succés", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            }
         } else {
             JOptionPane.showMessageDialog(null, resultMessage, "Attention", JOptionPane.WARNING_MESSAGE);
         }
     }
 
-    /*private static String validateAuteurInfo(String[] info) {
-        String message = "Please do the following\n\n";
-        if (info[0].isEmpty()) {
-            message += "Le champ [Code] est vide\n";
-        }
-        if (info[1].isEmpty()) {
-            message += "Le champ [Nom] est vide\n";
-        }
-        if (info[2].isEmpty()) {
-            message += "Le champ [Pays] est vide\n";
-        }
-        if (!info[0].isEmpty()) {
-            try {
-                Integer.valueOf(info[0]);
-                return "L'auteur a été ajouté avec succès";
-            } catch (Exception ex) {
-                message += "Le champ [Code] doit être entier\n";
-            }
-        }
-        return message;
-    }*/
+    private void addLivre(Signatures bdd, String[] info) {
+        String resultMessage = validateLivreInfo(info);
+        if (resultMessage.equals("ok")) {
 
-    /*private static String validateLivreInfo(String[] info) {
-        String message = "";
-        if (info[0].isEmpty()) {
-            message += "Le champ [Code] est vide\n";
-        }
-        if (info[1].isEmpty()) {
-            message += "Le champ [Titre] est vide\n";
-        }
-        if (info[2].isEmpty()) {
-            message += "Le champ [Catégorie] est vide\n";
-        }
-        if (info[3].isEmpty()) {
-            message += "Le champ [Code de l'auteur] est vide\n";
-        }
-        if (info[4].isEmpty()) {
-            message += "Le champ [Prix] est vide\n";
-        }
-        if (info[5].isEmpty()) {
-            message += "Le champ [Nombre de pages] est vide\n";
-        }
-        if (!info[0].isEmpty()) {
-            try {
-                Integer.valueOf(info[0]);
-                return "Le livre a été ajouté avec succès";
-            } catch (Exception ex) {
-                message += "Le champ [Code] doit être entier\n";
+            // verifier si le livre exist déjà dans la map
+            int oldSize = ((Bdd) bdd).getMap().get(new Auteur(Integer.valueOf(info[3]))).size();
+            bdd.addLivre(new Livre(info));
+            int newSize = ((Bdd) bdd).getMap().get(new Auteur(Integer.valueOf(info[3]))).size();
+            if (newSize == oldSize) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Vérifiez que:\n" +
+                                "- Le code du livre n'existe pas déjà\n" +
+                                "- Le nom du livre n'existe pas déjà\n" +
+                                "- Le code de l'auteur existe dans la base de données",
+                        "Attention",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Le livre a été ajouter avec succés", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, resultMessage, "Attention", JOptionPane.WARNING_MESSAGE);
         }
-        if (!info[3].isEmpty()) {
-            try {
-                Integer.valueOf(info[3]);
-                return "ok";
-            } catch (Exception ex) {
-                message += "Le champ [Code de l'auteur] doit être entier\n";
-            }
-        }
-        if (!info[4].isEmpty()) {
-            try {
-                Integer.valueOf(info[4]);
-                return "ok";
-            } catch (Exception ex) {
-                message += "Le champ [Prix] doit être entier\n";
-            }
-        }
-        if (!info[5].isEmpty()) {
-            try {
-                Integer.valueOf(info[5]);
-                return "ok";
-            } catch (Exception ex) {
-                message += "Le champ [Nombre de pages] doit être entier\n";
-            }
-        }
-        return message;
-    }*/
+    }
 }
