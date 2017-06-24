@@ -50,6 +50,7 @@ public class AddDialog extends JDialog implements ActionListener {
 
         addBouton = new JButton("Ajouter");
         addBouton.addActionListener(this);
+        getRootPane().setDefaultButton(addBouton);
         add(addBouton, BorderLayout.SOUTH);
 
         pack();

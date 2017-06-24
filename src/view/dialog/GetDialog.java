@@ -24,6 +24,7 @@ public class GetDialog extends JDialog implements ActionListener {
     public GetDialog(String titre, String message) {
         this.titre = titre;
         setTitle(titre);
+        setResizable(false);
 
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(new TitledBorder(message));
@@ -32,6 +33,7 @@ public class GetDialog extends JDialog implements ActionListener {
         textField = new JTextField(20);
         getButton = new JButton("Chercher");
         getButton.addActionListener(this);
+        getRootPane().setDefaultButton(getButton);
 
         getPanel.add(textField);
         getPanel.add(getButton);
