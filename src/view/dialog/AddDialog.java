@@ -16,14 +16,12 @@ import java.awt.event.ActionListener;
  * Created by rsn on 2017-06-10.
  */
 public class AddDialog extends JDialog implements ActionListener {
-    private String titre;
     private int nombreParams;
 
     private JTextField[] textFields;
     private JButton addBouton;
 
     public AddDialog(String titre, String message, String[] params) {
-        this.titre = titre;
 
         setTitle(titre);
         setLayout(new BorderLayout());
@@ -118,7 +116,6 @@ public class AddDialog extends JDialog implements ActionListener {
             } else {
                 addLivre(bdd, info);
             }
-
         }
     }
 
