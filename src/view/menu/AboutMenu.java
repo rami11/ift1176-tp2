@@ -3,15 +3,19 @@ package view.menu;
 import util.DialogUtils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by rsn on 2017-06-17.
  */
 public class AboutMenu extends JMenu implements ActionListener {
+    private static final String MANUEL_UTILISATEUR_URL = "manuel_utilisateur.html";
     private JMenuItem infoMenuItem;
     private JMenuItem aideMenuItem;
 
@@ -37,7 +41,12 @@ public class AboutMenu extends JMenu implements ActionListener {
         if (composant == infoMenuItem) {
             DialogUtils.showAppInfoDialog(null);
         } else if (composant == aideMenuItem) {
-            JOptionPane.showMessageDialog(null, "bla bal blab");
+            try {
+                File htmlFile = new File(MANUEL_UTILISATEUR_URL);
+                Desktop.getDesktop().browse(htmlFile.toURI());
+            } catch (IOException ioEx) {
+                ioEx.printStackTrace();
+            }
         }
     }
 }
