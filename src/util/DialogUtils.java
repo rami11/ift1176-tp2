@@ -38,7 +38,7 @@ public class DialogUtils {
             JOptionPane.showMessageDialog(null,
                     builder.toString(),
                     "Oeuvres de l'auteur", JOptionPane.INFORMATION_MESSAGE,
-                    new ImageIcon("icon_auteur_petit.png"));
+                    new ImageIcon("img/icon_auteur_petit.png"));
         }
     }
 
@@ -60,7 +60,7 @@ public class DialogUtils {
 
             JOptionPane.showMessageDialog(null,
                     message, "Info", JOptionPane.INFORMATION_MESSAGE,
-                    new ImageIcon("icon_livre_petit.png"));
+                    new ImageIcon("img/icon_livre_petit.png"));
         }
     }
 
@@ -68,9 +68,9 @@ public class DialogUtils {
         JOptionPane.showMessageDialog(
                 parent,
                 "Université de montreal\nIFT-1176 (TP2)\nDroits d'auteur\u00a9 Rami Serapian 2017",
-                "Info",
+                "Information",
                 JOptionPane.INFORMATION_MESSAGE,
-                new ImageIcon("udem_icon_petit.jpg"));
+                new ImageIcon("img/logo_udem_petit.jpg"));
     }
 
 }

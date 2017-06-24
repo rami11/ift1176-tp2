@@ -30,7 +30,7 @@ public class FichierMenu extends JMenu implements ActionListener {
         lireMenu.add(lireAuteurMenuItem);
         lireMenu.add(lireLivreMenuItem);
 
-        quitterMenuItem = new JMenuItem("Quitter", new ImageIcon("icon_exit_tout_petit.png"));
+        quitterMenuItem = new JMenuItem("Quitter", new ImageIcon("img/icon_exit_tout_petit.png"));
         quitterMenuItem.addActionListener(this);
         quitterMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
 

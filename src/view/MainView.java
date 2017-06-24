@@ -34,7 +34,7 @@ public class MainView extends JFrame {
 
         add(fichierDonneesPanel, BorderLayout.NORTH);
 
-        ImageIcon udemImage = new ImageIcon("udem_logo_medium.png");
+        ImageIcon udemImage = new ImageIcon("img/logo_udem_medium.png");
         JLabel imageLabel = new JLabel();
         imageLabel.setIcon(udemImage);
 

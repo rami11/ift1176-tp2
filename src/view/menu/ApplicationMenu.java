@@ -34,7 +34,7 @@ public class ApplicationMenu extends JMenu implements ActionListener {
         super(s);
 
         JMenu addMenu = new JMenu("Ajouter");
-        addMenu.setIcon(new ImageIcon("icon_add_tout_petit.png"));
+        addMenu.setIcon(new ImageIcon("img/icon_add_tout_petit.png"));
         addAuteurMenuItem = new JMenuItem("un auteur");
         addAuteurMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.ALT_MASK));
         addAuteurMenuItem.addActionListener(this);
@@ -48,7 +48,7 @@ public class ApplicationMenu extends JMenu implements ActionListener {
 
         //------------------------------------------------------
         JMenu getMenu = new JMenu("Chercher");
-        getMenu.setIcon(new ImageIcon("icon_search_tout_petit.png"));
+        getMenu.setIcon(new ImageIcon("img/icon_search_tout_petit.png"));
         getAuteurMenuItem = new JMenuItem("un auteur");
         getAuteurMenuItem.addActionListener(this);
         getAuteurMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
@@ -62,7 +62,7 @@ public class ApplicationMenu extends JMenu implements ActionListener {
 
         //------------------------------------------------------
         JMenu rapportMenu = new JMenu("Rapport");
-        rapportMenu.setIcon(new ImageIcon("icon_rapport_tout_petit.png"));
+        rapportMenu.setIcon(new ImageIcon("img/icon_rapport_tout_petit.png"));
         rapportParAuteurMenuItem = new JMenuItem("par auteur");
         rapportParAuteurMenuItem.addActionListener(this);
 
