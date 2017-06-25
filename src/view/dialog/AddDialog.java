@@ -147,21 +147,23 @@ public class AddDialog extends JDialog implements ActionListener {
         if (resultMessage.equals("ok")) {
 
             // verifier si le livre exist déjà dans la map
-            int oldSize = ((Bdd) bdd).getMap().get(new Auteur(Integer.valueOf(info[3]))).size();
-            bdd.addLivre(new Livre(info));
-            int newSize = ((Bdd) bdd).getMap().get(new Auteur(Integer.valueOf(info[3]))).size();
-            if (newSize == oldSize) {
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Vérifiez que:\n" +
-                                "- Le code du livre n'existe pas déjà\n" +
-                                "- Le nom du livre n'existe pas déjà\n" +
-                                "- Le code de l'auteur existe dans la base de données",
-                        "Attention",
-                        JOptionPane.WARNING_MESSAGE);
+            if (((Bdd) bdd).getMap().get(new Auteur(Integer.valueOf(info[3]))) != null) {
+                int oldSize = ((Bdd) bdd).getMap().get(new Auteur(Integer.valueOf(info[3]))).size();
+                bdd.addLivre(new Livre(info));
+                int newSize = ((Bdd) bdd).getMap().get(new Auteur(Integer.valueOf(info[3]))).size();
+                if (newSize == oldSize) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Vérifiez que:\n" +
+                                    "- Le nom du livre n'existe pas déjà\n",
+                            "Attention",
+                            JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Le livre a été ajouter avec succés", "Succès", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Le livre a été ajouter avec succés", "Succès", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
+                JOptionPane.showMessageDialog(null, "L'auteur pour lequel vous souhaitez ajouter le livre n'existe pas", "Attention", JOptionPane.WARNING_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, resultMessage, "Attention", JOptionPane.WARNING_MESSAGE);

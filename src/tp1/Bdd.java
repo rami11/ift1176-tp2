@@ -20,27 +20,6 @@ public class Bdd implements Signatures {
         m.clear();
     }
 
-    /**
-     * Check whether the book has been added successfully or not
-     *
-     * @param livres A set of books
-     * @param livre  The book to be added
-     * @return true or false if the book was added successfully of not
-     */
-    public boolean isLivreAdded(Set<Livre> livres, Livre livre) {
-        int oldSize = livres.size();
-        livres.add(livre);
-        int newSize = livres.size();
-        return newSize == oldSize + 1;
-    }
-
-    public boolean isElementAdded(Set<Object> elements, Object object) {
-        int oldSize = elements.size();
-        elements.add(object);
-        int newSize = elements.size();
-        return newSize == oldSize + 1;
-    }
-
     public Map<Auteur, TreeSet<Livre>> getMap() {
         return m;
     }
